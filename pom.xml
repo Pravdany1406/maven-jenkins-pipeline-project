@@ -63,6 +63,33 @@
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>0.8.6</version>
         </plugin>
+         <plugin>
+            <groupId>org.jfrog.buildinfo</groupId>
+            <artifactId>artifactory-maven-plugin</artifactId>
+            <version>3.2.3</version>
+            <inherited>false</inherited>
+            <executions>
+                <execution>
+                    <id>build-info</id>
+                    <goals>
+                        <goal>publish</goal>
+                    </goals>
+                    <configuration>
+                        <publisher>
+                            <contextUrl>http://localhost:8046/artifactory</contextUrl>
+                            <username>admin</username>
+                            <password>Jesus143</password>
+                            <repoKey>libs-release-local</repoKey>
+                            <snapshotRepoKey>libs-snapshot-local</snapshotRepoKey>
+                        </publisher>
+                        <buildInfo>
+  <buildNumber>${BUILD_NUMBER}</buildNumber>
+  <buildUrl>${BUILD_URL}</buildUrl>
+</buildInfo>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
 		</plugins>
 		</pluginManagement>
 	</build>
