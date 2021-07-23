@@ -87,8 +87,6 @@
                     <configuration>
                         <publisher>
                             <contextUrl>http://localhost:8082/artifactory</contextUrl>
-                            <username>admin</username>
-                            <password>Jesus143</password>
                             <repoKey>libs-release-local</repoKey>
                         </publisher>
                     </configuration>
