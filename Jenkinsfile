@@ -25,7 +25,7 @@ pipeline {
      }
         stage('s3 logging'){
             steps {
-              withAwsCli(
+              withCredentials(
                    credentialsId: 'aws-s3', 
                    defaultRegion: 'us-east-1')
               echo "job logs to s3"
