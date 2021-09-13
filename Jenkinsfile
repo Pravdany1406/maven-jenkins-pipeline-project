@@ -19,9 +19,9 @@ pipeline {
             }
             post {
                 success {
-                    java -jar maven.sample-0.0.1-SNAPSHOT.jar
-                }
-            }
-      }
+                    echo "Hello World"
+           }
+        }
+     }
   }
 }
