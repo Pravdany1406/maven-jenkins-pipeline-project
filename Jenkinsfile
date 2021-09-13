@@ -23,5 +23,11 @@ pipeline {
            }
         }
      }
+        stage('s3 logging'){
+            steps{
+                echo "job logs to s3"
+                cat ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >> ${BUILD_NUMBER}.log
+                /usr/bin/aws s3 cp  ${BUILD_NUMBER}.log s3://jenkinss3log/logs/${BUILD_NUMBER}.log
+     }
   }
 }
