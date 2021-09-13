@@ -31,7 +31,7 @@ pipeline {
                 echo "job logs to s3"
                 cat ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >> ${BUILD_NUMBER}.log
                 sh ''' aws s3 cp  ${BUILD_NUMBER}.log s3://jenkinss3log/logs/
-        }
+         }
        }
      }
   }
