@@ -21,6 +21,7 @@ pipeline {
                 success {
                     java -jar /var/lib/jenkins/.m2/repository/org/dany/maven.sample/0.0.1-SNAPSHOT/maven.sample-0.0.1-SNAPSHOT.jar
                 }
+            }
       }
-    }
+  }
 }
