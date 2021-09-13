@@ -8,13 +8,19 @@ pipeline {
     }
         stage ('Build') {
             steps {
-                sh 'mvn clean install' 
+                echo "Maven Compile"
+                sh 'mvn clean compile' 
             }            
       }
         stage ('Test') {
             steps {
-                sh 'mvn test' 
-            }            
+                echo "Maven Test and Packaging"
+                sh 'mvn test install' 
+            }
+            post {
+                success {
+                    java -jar /var/lib/jenkins/.m2/repository/org/dany/maven.sample/0.0.1-SNAPSHOT/maven.sample-0.0.1-SNAPSHOT.jar
+                }
       }
     }
 }
