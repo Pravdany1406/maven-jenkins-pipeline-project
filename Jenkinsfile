@@ -24,6 +24,7 @@ pipeline {
         }
      }
         stage('s3 logging'){
+            agent { label 'master' }
             steps {
               echo "publishing Build logs to s3"
               withCredentials([[
