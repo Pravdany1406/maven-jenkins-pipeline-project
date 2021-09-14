@@ -1,9 +1,5 @@
 pipeline {
     agent { label 'slave1' }
-    environment {
-        AWS_ACCESS_KEY_ID     = credentials('aws-s3')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-s3')
-    }
     stages {       
         stage('Checkout') {
             steps {
@@ -29,7 +25,7 @@ pipeline {
      }
         stage('s3 logging'){
             steps {
-              echo "job logs to s3"
+              echo "publishing Build logs to s3"
               withCredentials([[
                  $class: 'AmazonWebServicesCredentialsBinding',
                  credentialsId: "aws-s3",
@@ -37,7 +33,7 @@ pipeline {
                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
               ]]) {              
               cat ''' ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >> ${BUILD_NUMBER}.log '''
-              sh ''' /usr/bin/aws s3 cp  ${BUILD_NUMBER}.log s3://jenkinss3log/logs/ '''
+              sh ''' /usr/bin/aws s3 cp  ${BUILD_NUMBER}.log s3://jenkinss3log/logs/${BUILD_NUMBER}.log '''
          }
        }
      }
