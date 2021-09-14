@@ -29,10 +29,16 @@ pipeline {
      }
         stage('s3 logging'){
             steps {
-              withCredentials(bindings: [ credentialsId: 'aws-s3', defaultRegion: 'us-east-1'])
               echo "job logs to s3"
+              withCredentials([[
+                 $class: 'AmazonWebServicesCredentialsBinding',
+                 credentialsId: "aws-s3",
+                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+              ]]) {              
               cat ''' ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >> ${BUILD_NUMBER}.log '''
               sh ''' aws s3 cp  ${BUILD_NUMBER}.log s3://jenkinss3log/logs/ '''
+         }
        }
      }
   }
