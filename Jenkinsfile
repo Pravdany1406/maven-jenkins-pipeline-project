@@ -1,5 +1,9 @@
 pipeline {
     agent { label 'slave1' }
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('aws-s3')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-s3')
+    }
     stages {       
         stage('Checkout') {
             steps {
