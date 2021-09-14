@@ -26,14 +26,13 @@ pipeline {
         stage('s3 ariticaft publishing'){
             steps {
               echo "publishing Build aritifacts to s3"
-              withCredentials([[
+              /* withCredentials([[
                  $class: 'AmazonWebServicesCredentialsBinding',
                  credentialsId: "aws-s3",
                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-              ]]) {              
+              ]])   */          
               sh ''' aws s3 cp  /home/ubuntu/jenkins/workspace/test/target/*.jar   s3://jenkinss3log/Artifacts/${BUILD_NUMBER}_maven.sample-0.0.1-SNAPSHOT.jar '''
-         }
        }
      }
   }
