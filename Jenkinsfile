@@ -32,7 +32,7 @@ pipeline {
                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
               ]]) {              
-              sh ''' aws s3 cp  /home/ubuntu/jenkins/workspace/test/target/*.jar   s3://jenkinss3log/logs/${BUILD_NUMBER}.jar '''
+              sh ''' aws s3 cp  /home/ubuntu/jenkins/workspace/test/target/*.jar   s3://jenkinss3log/Artifacts/${BUILD_NUMBER}_maven.sample-0.0.1-SNAPSHOT.jar '''
          }
        }
      }
