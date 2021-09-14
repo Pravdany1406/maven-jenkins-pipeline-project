@@ -37,7 +37,7 @@ pipeline {
                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
               ]]) {              
               cat ''' ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >> ${BUILD_NUMBER}.log '''
-              sh ''' aws s3 cp  ${BUILD_NUMBER}.log s3://jenkinss3log/logs/ '''
+              sh ''' /usr/bin/aws s3 cp  ${BUILD_NUMBER}.log s3://jenkinss3log/logs/ '''
          }
        }
      }
