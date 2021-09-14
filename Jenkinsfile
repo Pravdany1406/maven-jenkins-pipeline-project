@@ -23,17 +23,16 @@ pipeline {
            }
         }
      }
-        stage('s3 logging'){
-            agent { label 'master' }
+        stage('s3 ariticaft publishing'){
             steps {
-              echo "publishing Build logs to s3"
+              echo "publishing Build aritifacts to s3"
               withCredentials([[
                  $class: 'AmazonWebServicesCredentialsBinding',
                  credentialsId: "aws-s3",
                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
               ]]) {              
-              sh ''' aws s3 cp  /var/lib/jenkins/jobs/test/builds/${BUILD_NUMBER}/log s3://jenkinss3log/logs/${BUILD_NUMBER}.log '''
+              sh ''' aws s3 cp  /home/ubuntu/jenkins/workspace/test/target/*.jar   s3://jenkinss3log/logs/${BUILD_NUMBER}.jar '''
          }
        }
      }
